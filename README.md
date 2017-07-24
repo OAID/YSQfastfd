@@ -1,8 +1,10 @@
-This is a demo use YSQ face detect algorithm [![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
+This is a demo use YSQ face detect algorithm
+
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
 
 ## Performance on ARM platform
 
-### Allwinner R40 A7 platform
+### Allwinner R40 A7 platform (Allwinner R40 and Rockchip RK3399)
 
 ![R40_perf_two_face](https://oaid.github.io/pics/YSQfd/R40_perf.png) 
 
