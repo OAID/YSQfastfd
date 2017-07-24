@@ -8,18 +8,19 @@ This is a demo use YSQ face detect algorithm.
 ## Build
 * Check the gtk+ devel library is installed
 
- "sudo apt install build-essential vim-gtk libgtk-3-0 libgtk-3-dev libegl1-mesa-dev"
+		"sudo apt install build-essential vim-gtk libgtk-3-0 libgtk-3-dev libegl1-mesa-dev"
 
 * Build the runtime shared libraries
 
- "make"
+		 "make"
 
 * Copy libraries 
  
- "sudo mkdir /usr/local/ysqfd"
- "sudo cp 3rdlibs/libysqfd.so /usr/local/ysqfd/."
- "sudo cp middle/libaaid.so /usr/local/ysqfd/."
- "export LD_LIBRARY_PATH=/usr/local/ysqfd"
+		 "sudo mkdir /usr/local/ysqfd"
+ 		"sudo cp 3rdlibs/libysqfd32.so /usr/local/ysqfd/."
+			"sudo cp 3rdlibs/libysqfd64.so /usr/local/ysqfd/."
+		 "sudo cp middle/libaaid.so /usr/local/ysqfd/."
+		 "export LD_LIBRARY_PATH=/usr/local/ysqfd"
 
 * run "fddemo/ysqfddemo"
 
