@@ -1,8 +1,7 @@
 This is a demo use YSQ face detect algorithm.
 
 Platform :
-  ARM A7 processor
-  Ubuntu 16.04 with GTK3 library
+ Ubuntu 16.04 with GTK3 library
   USB camera (480P/720P), YUYV
 
 algorithm :
