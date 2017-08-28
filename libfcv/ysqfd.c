@@ -94,7 +94,7 @@ int ysqfd_process(void *keyinfo, fcvImage *vimg)
 	fcv_rectangle_t rectangle;
 	fcv_point_t point;
     struct ysq_oformat *result;
-	int dolandmark = LANDMARK_DISABLE;
+	int dolandmark = LANDMARK_ENABLE;
 
 #ifdef PERF_STATISTICS
 	struct timeval pretv, sumtv;
