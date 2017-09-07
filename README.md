@@ -1,4 +1,4 @@
-This is a demo use YSQ face detect algorithm
+ YSQ face detect algorithm demo on ARM (Linux) platform.
 
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
 
