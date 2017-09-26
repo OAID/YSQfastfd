@@ -1,6 +1,7 @@
  YSQ face detect algorithm demo on ARM (Linux) platform.
 
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
+[![License](https://img.shields.io/hexpm/l/plug.svg)](LICENSE)
 
 ## Performance on ARM platform 
 
