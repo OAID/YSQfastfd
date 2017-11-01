@@ -30,17 +30,12 @@ Test on Allwinner R40 (ARM32) and Rockchip RK3399 (ARM64)
 	cd YSQfastfd
 	make -j4
 
-#### Copy libraries 
- 
-	sudo mkdir /usr/local/ysqfd
-	sudo cp 3rdlibs/libysqfd32.so /usr/local/ysqfd/.
-	sudo cp 3rdlibs/libysqfd64.so /usr/local/ysqfd/.
-	sudo cp middle/libaaid.so /usr/local/ysqfd/.
-	export LD_LIBRARY_PATH=/usr/local/ysqfd
-
 #### run the demo
 
-	fddemo/ysqfddemo
+	chmod +x ./run.sh
+        ./run.sh
 
 NOTE :
   Type key 'q' to quit the display window.
+  Type key 's' to show the match info.
+  Type key 'p' to save the face picture.
