@@ -1,10 +1,13 @@
-#ifndef WINDOW_H__
-#define WINDOW_H__
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <sysdef.h>
 #include <cairo.h>
-#include <gtk/gtk.h>  
+#include <gtk/gtk.h>
 #include <fcvimage.h>
+#include <oaid_base.h>
+
+namespace OAID {
 
 #define GTKINIT_DONE           1
 
@@ -16,37 +19,63 @@
 #define WINDOW_DEFHEIGHT       240           /* window normal height */
 #define WAITKEY_TIMEOUT        1000
 #define WINDOW_QUITKEY         'q'
+#define WINDOW_PHOTOKEY        'p'
+#define WINDOW_SHOWKEY         's'
 
 typedef void (* windowOperationFn)(cairo_t *cr, gpointer data);
 
 struct vwindow {
-	char name[MAX_NAME_STRLEN];
-	GtkWidget *management;
-	GtkWidget *drawingerea;
-	GdkPixbuf *pixbuf;
+    char name[MAX_NAME_STRLEN];
+    GtkWidget *management;
+    GtkWidget *drawingerea;
+    GdkPixbuf *pixbuf;
 
-	windowOperationFn operationfunc;
-	gpointer *opfunc_data;
+    windowOperationFn operationfunc;
+    gpointer *opfunc_data;
 
-	uint32_t flags;
+    uint32_t flags;
 };
 
 struct window_desc {
-	int nr_max;
-	int nr_free;
-	struct vwindow *list[MAX_OPENED_WINDOW];
+    int nr_max;
+    int nr_free;
+    struct vwindow *list[MAX_OPENED_WINDOW];
 };
 
-void rectangleOnWindow(cairo_t *cr, gpointer data);
+class window : public oaid_base
+{
+public:
+    int gtk_initialized;
+    struct window_desc _windows;
 
-void named_window(const char *name, int flags);
-void resize_window(const char *name, int width, int height);
-void move_window(const char *name, int x, int y);
-void destroy_window(const char *name);
-int waitkey(int msec);
+public:
+    window();
 
-void imageshow(const char *name, fcvImage *fcvimg);
-void imageshow_ops(const char *name, fcvImage *fcvimg,
-			windowOperationFn opfunction, gpointer opfunc_data);
+    struct vwindow * window_byname(const char *name, int *wid);
+    void __vwindow_attach(struct vwindow *window);
+    void __vwindow_deattach(struct vwindow *window);
+    void rectangle_onwindow(cairo_t *cr, gpointer data);
+    void text_osd_onwindow(cairo_t *cr, gpointer data);
 
-#endif
+    void vwindow_internal_init(struct vwindow *vwin);
+    void window_set_icon(GtkWindow *window);
+    void named_window(const char *name, int flags);
+    void resize_window(const char *name, int width, int height);
+
+    void move_window(const char *name, int x, int y);
+    void destroy_window(const char *name);
+
+    void imageshow(const char *name, fcvImage *fcvimg);
+    void imageshow_ops(const char *name, fcvImage *fcvimg,
+                windowOperationFn opfunction, gpointer opfunc_data);
+
+    static gboolean do_wait(gpointer data);
+    static int waitkey(int msec);
+    static void keyboard_press(GtkWidget *widget, GdkEventKey *event, gpointer data);
+    static gboolean delete_window(GtkWidget *widget, GdkEvent *event, gpointer data);
+    static gboolean do_drawing(GtkWidget *widget, cairo_t *cr, gpointer data);
+};
+
+}
+
+#endif // WINDOW_H

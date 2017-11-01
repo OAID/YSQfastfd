@@ -16,34 +16,23 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-#include <aaidalgr.h>
-#include <perf.h>
+#include <ysqfd.h>
+#include <oaidsys.h>
+#include <midlayer.h>
+
+namespace OAID {
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#ifdef __no_ysqfd_slib
-void *facedetect_frontal(void *rtmem, ...)
-{
-	static int cnt = 0;
-	char *str;
-
-	str = (char *)rtmem;
-	pr_debug("Face detection call!\n");
-	sprintf(str, "FD result ....... %d\n", cnt++);
-
-	return rtmem;
-}
-#endif
-
 int priv_ysq_facedetect(struct alg_config *c, struct alg_resource *r)
 {
-	struct ysq_fdconfig *conf;
+    struct ysqfd::ysq_fdconfig *conf;
 
 	pr_debug("Call YSQ FD algorithm\n");
 
-	conf = &c->config.ysqfd;
+    conf = (struct ysqfd::ysq_fdconfig *)&c->privconfig.ysqfd_config;
 	r->rtmem = c->rtmem[0].base;
 
 	pr_debug("YSQ FD process info :\n"
@@ -55,7 +44,7 @@ int priv_ysq_facedetect(struct alg_config *c, struct alg_resource *r)
 	pr_debug("YSQ FD config info :\n"
 			"  image width      : %d\n"
 			"  image height     : %d\n"
-			"  min_neighbors    : %d\n"
+            "  min_neighbors    : %d\n"
 			"  min_object_width : %d\n"
 			"  max_object_width : %d\n"
 			"  step     : %d\n"
@@ -67,17 +56,21 @@ int priv_ysq_facedetect(struct alg_config *c, struct alg_resource *r)
 			conf->landmark, conf->scale);
 
 	r->resbuf = facedetect_frontal((unsigned char *)r->rtmem, (unsigned char *)r->inbuf,
-					conf->imgwidth, conf->imgheight, conf->imgwidth,
+                    conf->imgwidth, conf->imgheight, conf->imgwidth,
 					conf->scale, conf->min_neighbors,
 					conf->min_object_width, conf->max_object_width,
 					conf->landmark);
 
 	if (r->resbuf == NULL)
-		return -EINVAL;
+        return -EINVAL;
 
-	return 0;
+    return 0;
 }
+
 
 #ifdef __cplusplus
 }
 #endif
+
+
+}

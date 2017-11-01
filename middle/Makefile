@@ -7,10 +7,13 @@ slib-objs += midlayer.o
 CXXFLAGS += -fpic -shared
 
 .PHONY : all clean
-all : $(SLIBAAID)
+all : $(SLIBAAID) movefile
 
 $(SLIBAAID) : $(slib-objs)
 	$(CXX) $(CXXFLAGS) -o $@ $^
+
+movefile : $(SLIBAAID)
+	$(CP) $(SLIBAAID) ../3rdlibs/
 
 clean :
 	$(RM) $(SLIBAAID) *.o *.d *.i

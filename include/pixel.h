@@ -47,13 +47,13 @@ struct fcv_line {
 };
 typedef struct fcv_line fcv_line_t;
 
-struct fcv_rectangle {
+struct fcv_rect {
 	int x;
 	int y;
 	int width;
 	int height;
 };
-typedef struct fcv_rectangle fcv_rectangle_t;
+typedef struct fcv_rect fcv_rectangle_t;
 
 typedef uint32_t fcv_rgbpix_t;
 

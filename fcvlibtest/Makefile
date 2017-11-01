@@ -7,8 +7,8 @@ LDFLAGS += $(linksyslibs)
 
 all : $(EXES)
 
-libfcvtest : libfcvtest.c $(FCVLIB)
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+libfcvtest : libfcvtest.cpp $(FCVLIB)
+	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
 clean :
 	$(RM) $(EXES)

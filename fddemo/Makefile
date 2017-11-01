@@ -9,8 +9,8 @@ EXES = ysqfddemo
 
 all : $(EXES)
 
-ysqfddemo : ysqfddemo.c
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+ysqfddemo : ysqfddemo.cpp
+	$(CXX) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
 clean :
 	$(RM) $(EXES)

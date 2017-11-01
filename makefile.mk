@@ -1,6 +1,9 @@
+PREFIX = aarch64-linux-gnu-
+
 CC = $(PREFIX)gcc
 CXX = $(PREFIX)g++
 AR = $(PREFIX)ar
+CP = cp
 
 # ARMv8 (arm64) enable, comment it if on arm32
 ONARM64 = 1
@@ -13,10 +16,13 @@ LIBFCVDIR = $(TOPDIR)/libfcv
 MLIBDIR = $(TOPDIR)/middle
 3RDLIBS = $(TOPDIR)/3rdlibs
 GTK-VERSION = gtk+-3.0
+GTKLIBDIR = /opt/gtk/lib
+
+export PKG_CONFIG_PATH=$(GTKLIBDIR)/pkgconfig
 
 FCVLIB = $(LIBFCVDIR)/liboal.a
 
-linksyslibs = -lm -lpthread `pkg-config --libs $(GTK-VERSION)`
+linksyslibs = -lm -lpthread -L$(GTKLIBDIR) -lmount -lpcre -lxcb -lexpat -lXau -lXdmcp -lsystemd -lselinux -lXrender -lblkid -llzma -lgcrypt -lgpg-error -luuid `pkg-config --libs $(GTK-VERSION)`
 linkfcvlibs = -L$(LIBFCVDIR) -loal
 linkaaidlibs = -L$(MLIBDIR) -laaid
 
@@ -34,19 +40,20 @@ else
  CXXFLAGS += -DCAM_FRAME_480P
 endif
 
-CFLAGS += `pkg-config --cflags $(GTK-VERSION)`
+CFLAGS += -L$(GTKLIBDIR) `pkg-config --cflags $(GTK-VERSION)`
 
 CFLAGS += -Wall -O2
 CFLAGS += -I$(INCDIR)
 
+CXXFLAGS += -L$(GTKLIBDIR) `pkg-config --cflags $(GTK-VERSION)`
 CXXFLAGS += -Wall -O2
 CXXFLAGS += -I$(INCDIR)
 
 #CFLAGS +=-DDEBUG
 #CXXFLAGS +=-DDEBUG
 
-CFLAGS += -DPERF_STATISTICS
-CXXFLAGS += -DPERF_STATISTICS
+#CFLAGS += -DPERF_STATISTICS
+#CXXFLAGS += -DPERF_STATISTICS
 
 CFLAGS += -D__linux__
 CXXFLAGS += -D_linux__

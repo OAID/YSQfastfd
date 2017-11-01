@@ -9,7 +9,7 @@ struct list_head
 #define LIST_HEAD_INIT(name) {&(name), &(name)}
 
 #define LIST_HEAD(name)		\
-	struct list_head name = LIST_HEAD_INIT(name);
+    struct list_head name = LIST_HEAD_INIT(name)
 
 #define INIT_LIST_HEAD(ptr)							\
 	do{												\

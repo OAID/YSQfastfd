@@ -1,26 +1,42 @@
-#ifndef QUEUE_H__
-#define QUEUE_H__
+#ifndef QUEUE_H
+#define QUEUE_H
 
-#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <oaid_base.h>
 
-struct rqitem
+namespace OAID {
+
+#define rq_isfull(q) (((q)->tail + 1) % (q)->size == (q)->head)
+
+#define rq_isempty(q)  ((q)->tail == (q)->head)
+
+class queue : public oaid_base
 {
-	unsigned long data;
+public:
+    struct rqitem
+    {
+        unsigned long data;
+    };
+
+    struct ringqueue
+    {
+        int size;
+        int head;
+        int tail;
+        struct rqitem *item;
+    };
+
+public:
+    queue();
+
+    void ringqueue_destroy(struct ringqueue *q);
+    int rq_dequeue(struct ringqueue *q, struct rqitem *item);
+    int rq_enqueue(struct ringqueue *q, struct rqitem item);
+    int ringqueue_init(struct ringqueue *q, int size);
 };
 
-struct ringqueue
-{
-	int size;
-	int head;
-	int tail;
-	struct rqitem *item;
-};
+}
 
-#define rq_isfull(q)                           \
-	(((q)->tail + 1) % (q)->size == (q)->head)
-
-#define rq_isempty(q)                          \
-	((q)->tail == (q)->head)
-
-
-#endif
+#endif // QUEUE_H

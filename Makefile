@@ -12,6 +12,10 @@ APPDIRS += $(TOPDIR)/fddemo
 
 all : libs apps
 
+force:
+# Declare the contents of the .PHONY variable as phony.  We keep that
+# information in a variable so we can use it in if_changed and friends.
+
 libs : force
 	@for dir in $(LIBDIRS); do \
 		$(MAKE) -C $$dir;      \

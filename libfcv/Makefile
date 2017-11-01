@@ -1,11 +1,12 @@
 LIBOAL = liboal.a
 
+lib-objs += oaid_base.o
 lib-objs += video.o
 lib-objs += yuvproc.o
 lib-objs += window.o
 lib-objs += fcvimage.o
 lib-objs += queue.o
-lib-objs += aaidsys.o
+lib-objs += oaidsys.o
 lib-objs += ysqfd.o
 
 .depens := $(patsubst %.o, %.d, $(lib-objs))
