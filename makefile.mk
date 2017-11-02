@@ -16,13 +16,10 @@ LIBFCVDIR = $(TOPDIR)/libfcv
 MLIBDIR = $(TOPDIR)/middle
 3RDLIBS = $(TOPDIR)/3rdlibs
 GTK-VERSION = gtk+-3.0
-GTKLIBDIR = /opt/gtk/lib
-
-export PKG_CONFIG_PATH=$(GTKLIBDIR)/pkgconfig
 
 FCVLIB = $(LIBFCVDIR)/liboal.a
 
-linksyslibs = -lm -lpthread -L$(GTKLIBDIR) -lmount -lpcre -lxcb -lexpat -lXau -lXdmcp -lsystemd -lselinux -lXrender -lblkid -llzma -lgcrypt -lgpg-error -luuid `pkg-config --libs $(GTK-VERSION)`
+linksyslibs = -lm -lpthread `pkg-config --libs $(GTK-VERSION)`
 linkfcvlibs = -L$(LIBFCVDIR) -loal
 linkaaidlibs = -L$(MLIBDIR) -laaid
 
@@ -40,12 +37,11 @@ else
  CXXFLAGS += -DCAM_FRAME_480P
 endif
 
-CFLAGS += -L$(GTKLIBDIR) `pkg-config --cflags $(GTK-VERSION)`
-
+CFLAGS += `pkg-config --cflags $(GTK-VERSION)`
 CFLAGS += -Wall -O2
 CFLAGS += -I$(INCDIR)
 
-CXXFLAGS += -L$(GTKLIBDIR) `pkg-config --cflags $(GTK-VERSION)`
+CXXFLAGS += `pkg-config --cflags $(GTK-VERSION)`
 CXXFLAGS += -Wall -O2
 CXXFLAGS += -I$(INCDIR)
 
