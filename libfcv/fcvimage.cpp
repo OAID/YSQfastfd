@@ -181,6 +181,8 @@ void fcvimage::fcv_saveface(fcvImage *fcvimg, fcv_rectangle_t *rect, char * file
         fcvImage* temp = gdk_pixbuf_new_subpixbuf(fcvimg, rect->x, rect->y, rect->width, rect->height);
 
         gdk_pixbuf_save(temp, filepath, "jpeg", NULL, "quality", "100", NULL);
+		
+		g_object_unref(temp);
 
 }
 
