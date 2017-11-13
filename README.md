@@ -37,5 +37,5 @@ Test on Allwinner R40 (ARM32) and Rockchip RK3399 (ARM64)
 
 NOTE :
 * Type key 'q' to quit the display window.
-* Type key 's' to show the match info.
+* Type key 's' to show the landmark info.
 * Type key 'p' to save the face picture.
